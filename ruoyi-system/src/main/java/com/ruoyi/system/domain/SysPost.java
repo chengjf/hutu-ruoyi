@@ -3,6 +3,8 @@ package com.ruoyi.system.domain;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
+import com.baomidou.mybatisplus.annotation.TableField;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import com.ruoyi.common.annotation.Excel;
@@ -39,6 +41,7 @@ public class SysPost extends BaseEntity
     private String status;
 
     /** 用户是否存在此岗位标识 默认不存在 */
+    @TableField(exist = false)
     private boolean flag = false;
 
     public Long getPostId()

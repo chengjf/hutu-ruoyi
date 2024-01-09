@@ -1,6 +1,8 @@
 package com.ruoyi.system.service.impl;
 
 import java.util.List;
+
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.common.constant.UserConstants;
@@ -34,7 +36,13 @@ public class SysPostServiceImpl implements ISysPostService
     @Override
     public List<SysPost> selectPostList(SysPost post)
     {
-        return postMapper.selectPostList(post);
+        List<SysPost> sysPosts = postMapper.selectPostList(post);
+        sysPosts = postMapper.selectList(new LambdaQueryWrapper<SysPost>()
+                .like(StringUtils.isNotEmpty(post.getPostCode()),SysPost::getPostCode,post.getPostCode())
+                .eq(StringUtils.isNotEmpty(post.getStatus()), SysPost::getStatus, post.getStatus())
+                .eq(StringUtils.isNotEmpty(post.getPostName()), SysPost::getPostName, post.getPostName())
+        );
+        return sysPosts;
     }
 
     /**
