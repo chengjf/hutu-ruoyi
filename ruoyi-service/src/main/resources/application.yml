@@ -1,0 +1,46 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    name: defaultDataSource
+    url: jdbc:mysql://localhost:3306/ry?serverTimezone=UTC
+    username: root
+    password: todosoft
+
+  security:
+    user:
+      name: admin
+dubbo:
+  registry:
+    address: nacos://localhost:8848?username=nacos&password=nacos&namespace=dubbo
+
+  protocol:
+    name: dubbo
+    port: -1
+  application:
+    qos-enable: true
+    name: RuoyiApplication
+    qos-port: 22222
+    qos-accept-foreign-ip: false
+    logger: slf4j
+  metadata-report:
+    address: nacos://localhost:8848?username=nacos&password=nacos&namespace=dubbo
+management:
+  metrics:
+    enabled: true
+  endpoints:
+    jmx:
+      exposure:
+        include: '*'
+    web:
+      base-path: /
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: always
+  server:
+    port: 7002
+server:
+  port: 0
+
+

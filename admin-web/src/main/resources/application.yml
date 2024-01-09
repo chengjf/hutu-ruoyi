@@ -1,0 +1,38 @@
+spring:
+  application:
+    name: admin-web
+  security:
+    user:
+      name: admin
+      password: 123456
+logging:
+  level:
+    root: INFO
+    tech.hutu: DEBUG
+    org.springframework.web: INFO
+    org.springframework.security: INFO
+
+dubbo:
+  registry:
+    address: nacos://localhost:8848?username=nacos&password=nacos&namespace=dubbo
+    check: false
+    register: false
+  consumer:
+    check: false
+  protocol:
+    name: dubbo
+    port: -1
+  application:
+    qos-enable: true
+    name: admin-web
+    qos-port: -1
+    qos-accept-foreign-ip: false
+    logger: slf4j
+  metadata-report:
+    address: nacos://localhost:8848?username=nacos&password=nacos&namespace=dubbo
+
+app:
+  token:
+    secret: SOME_RANDOM_SECRET_FOR_SIGNING_JWT
+    issuer: SOME_NAME_FOR_ISSER_JWT
+    expires-minute: 5
